@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="no" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width,initial-scale=1" name="viewport">
+  <title>Arkade 5 - Test- og pakkeverktøy for arkivuttrekk</title>
+  <meta name="description" content="Arkade sørger for at arkivuttrekk fra NOARK- eller fagsystemer er iht. til gjeldende arkivstandarder, hjelper deg som arkivskaper med å rette avvik, opprette metadata og produsere ferdige arkivpakker klar til avlevering.">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,600,700&display=swap" rel="stylesheet">
+  <link href="css/fontawesome.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/MarkerCluster.css" rel="stylesheet">
+  <link href="css/MarkerCluster.Default.css" rel="stylesheet">
+  <link href="css/IndeterminateProgressBar.css" rel="stylesheet">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#419488">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+  <meta name="msapplication-TileColor" content="#419488">
+  <meta name="theme-color" content="#419488">
+</head>
+
+<body>
+  <!--<nav class="navigationBar">
+    <span class="menuButton">
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="menuIcon" focusable="false" role="presentation">
+        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
+      </svg>
+    </span>
+  </nav>-->
+  <div id="downloadDialog" class="modalOverlay">
+    <div class="modalContent">
+      <form>
+        <input id="downloadDialogApplicationType" type="hidden" />
+        <input id="organizationNumber" type="hidden" />
+
+        <label for="organizationSearch">Organisasjon</label>
+        <input type="search" type="text" autocomplete="off" id="organizationSearch" onkeyup="handleOrganizationSearchChange(event.target.value)" onblur="handleOrganizationSearchBlur()" onSearch="handleOrganizationOnSearch(event)" placeholder="Søk etter organisasjon" />
+        <div id="organizationSearchResultsDropdown" class="searchResultsDropdown"></div>
+
+        <label for="userEmail" class="required">E-post</label>
+        <input id="userEmail" type="email" placeholder="navn@domene.no" onkeyup="validateForm()"/>
+
+        <label for="arkadeVersion">Arkade-versjon</label>
+        <select id="arkadeVersion" onchange="handleArkadeVersionSelect()"></select>
+
+        <input id="userNews" type="checkbox" />
+        <label for="userNews">Jeg ønsker å bli informert om nyheter og forbedringer relatert til Arkade programvare</label>
+      </form>
+
+        <div class="buttonRow alignRight">
+          <b id="download-info"></b>
+          <button onclick="hideDownloadDialog()" id="downloadDialogCancel">
+            <span id="downloadDialogCancelButtonText">Avbryt</span>
+          </button>
+          <button onclick="handleDownloadDialogSubmit()" disabled id="downloadDialogSubmit">
+            <span id="downloadDialogSubmitButtonText">Last ned</span>
+            <div id="downloadDialogSubmitProgressBar" class="progress-bar">
+              <div class="progress-bar-value"></div>
+            </div>
+          </button>
+        </div>
+    </div>
+  </div>
+
+  <div id="map-modal" class="modalOverlay">
+    <div class="modalContent mapModal">
+      <div class="modalHeading">
+        <span>Organisasjoner som har lastet ned Arkade 5
+          <br /><br />
+          <small>Klikk på <img src="favicon-16x16.png" alt="Arkade-logo"> for å vise organisasjonsnavn</small>
+        </span>
+        <button type="button" onclick="hideMapModal()">&times;</button>
+      </div>
+      <div id="organization-map"></div>
+    </div>
+  </div>
+
+  <div class="appContainer">
+    <header>
+      <picture>
+        <source srcset="assets/images/header_480.webp 480w,assets/images/header_800.webp 800w,assets/images/header_1260.webp 1260w,assets/images/header_1440.webp 1440w" type="image/webp">
+        <source srcset="assets/images/header_480.jpg 480w,assets/images/header_800.jpg 800w,assets/images/header_1260.jpg 1260w,assets/images/header_1440.jpg 1440w" type="image/jpg">
+        <img src="assets/images/header_1024.jpg" alt="">
+      </picture>
+      <div class="overlay">
+        <div class="contentContainer">
+        <h1>
+          Arkade 5
+          <small>Test- og pakkeverktøy for arkivuttrekk</small>
+        </h1>
+        <p>
+          Arkade sørger for at arkivuttrekk fra NOARK- eller fagsystemer er iht. til gjeldende arkivstandarder, hjelper deg som arkivskaper med å rette avvik, opprette metadata og produsere ferdige arkivpakker klar til avlevering.
+        </p>
+        <button onclick="showDownloadDialog('windows')">
+          <span>
+            <i class="fab fa-windows fa-lg"></i> Last ned Arkade 5 for Windows
+          </span>
+        </button>
+        <button onclick="showDownloadDialog('cli')">
+          <span>
+            <i class="fas fa-terminal fa-lg"></i> Last ned Arkade 5 CLI
+          </span>
+        </button>
+        <a href="https://docs.arkade.arkivverket.no" title="Brukerveiledning for Arkade 5" target="_blank" rel="noopener noreferrer" class="button primary-background">
+          <span>
+            <i class="fas fa-book fa-lg"></i> Dokumentasjon
+          </span>
+        </a>
+        </div>
+      </div>
+    </header>
+    <div>
+      <div class="contentContainer">
+        <h2 onclick="toggleExpand('latestRelease', this)" class="expandToggle">Se nytt i siste versjon</h2>
+        <div id="latestRelease" class="accordionList collapsed"></div>
+        <h3 onclick="toggleExpand('previousReleases', this)" class="expandToggle">Se tidligere versjoner</h3>
+        <div id="previousReleases" class="accordionList collapsed"></div>
+        <div class="organization-info">
+          <h3><span id="organizationCount"></span> organisasjoner har lastet ned Arkade 5</h3>
+          <figure onclick="showMapModal()">
+            <img class="organization-map-image" src="organization-map.png" alt="organization-map">
+            <figcaption><a>Se på kart</a></figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+    <div class="dark-background">
+      <div class="contentContainer">
+        <img src="assets/images/demo.gif" class="contentImage"/>
+        <div class="section"></div>
+        <div class="section"></div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="contentContainer flexContainer">
+        <img src="assets/images/arkivverket-logo.png" />
+        <div><a href="mailto:support.arkade@arkivverket.no">support.arkade@arkivverket.no</a></div>
+      </div>
+    </footer>
+  </div>
+  <script src="scripts/download2.js"></script>
+  <script src="scripts/markdown-it.min.js"></script>
+  <script src="scripts/gitHubApiService.js"></script>
+  <script src="scripts/brregApiService.js"></script>
+  <script src="scripts/functions.js"></script>
+  <script src="scripts/init.js"></script>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+  <script src="scripts/leaflet.markercluster.js"></script>
+  <script src="scripts/organization-map.js"></script>
+</body>
+
+</html>
