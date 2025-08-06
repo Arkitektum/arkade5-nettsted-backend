@@ -7,17 +7,17 @@
   <title>Arkade 5 - Test- og pakkeverktøy for arkivuttrekk</title>
   <meta name="description" content="Arkade sørger for at arkivuttrekk fra NOARK- eller fagsystemer er iht. til gjeldende arkivstandarder, hjelper deg som arkivskaper med å rette avvik, opprette metadata og produsere ferdige arkivpakker klar til avlevering.">
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,600,700&display=swap" rel="stylesheet">
-  <link href="css/fontawesome.min.css" rel="stylesheet">
-  <link href="css/style.css" rel="stylesheet">
-  <link href="css/MarkerCluster.css" rel="stylesheet">
-  <link href="css/MarkerCluster.Default.css" rel="stylesheet">
-  <link href="css/IndeterminateProgressBar.css" rel="stylesheet">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">
-  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#419488">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+  <link href="frontend/css/fontawesome.min.css" rel="stylesheet">
+  <link href="frontend/css/style.css" rel="stylesheet">
+  <link href="frontend/css/MarkerCluster.css" rel="stylesheet">
+  <link href="frontend/css/MarkerCluster.Default.css" rel="stylesheet">
+  <link href="frontend/css/IndeterminateProgressBar.css" rel="stylesheet">
+  <link rel="frontend/apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="frontend/icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="frontend/icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="frontend/manifest" href="/site.webmanifest">
+  <link rel="frontend/mask-icon" href="/safari-pinned-tab.svg" color="#419488">
+  <link rel="frontend/stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
   <meta name="msapplication-TileColor" content="#419488">
   <meta name="theme-color" content="#419488">
 </head>
@@ -81,9 +81,9 @@
   <div class="appContainer">
     <header>
       <picture>
-        <source srcset="assets/images/header_480.webp 480w,assets/images/header_800.webp 800w,assets/images/header_1260.webp 1260w,assets/images/header_1440.webp 1440w" type="image/webp">
-        <source srcset="assets/images/header_480.jpg 480w,assets/images/header_800.jpg 800w,assets/images/header_1260.jpg 1260w,assets/images/header_1440.jpg 1440w" type="image/jpg">
-        <img src="assets/images/header_1024.jpg" alt="">
+        <source srcset="frontend/assets/images/header_480.webp 480w,frontend/assets/images/header_800.webp 800w,frontend/assets/images/header_1260.webp 1260w,frontend/assets/images/header_1440.webp 1440w" type="image/webp">
+        <source srcset="frontend/assets/images/header_480.jpg 480w,frontend/assets/images/header_800.jpg 800w,frontend/assets/images/header_1260.jpg 1260w,frontend/assets/images/header_1440.jpg 1440w" type="image/jpg">
+        <img src="frontend/assets/images/header_1024.jpg" alt="">
       </picture>
       <div class="overlay">
         <div class="contentContainer">
@@ -121,7 +121,7 @@
         <div class="organization-info">
           <h3><span id="organizationCount"></span> organisasjoner har lastet ned Arkade 5</h3>
           <figure onclick="showMapModal()">
-            <img class="organization-map-image" src="organization-map.png" alt="organization-map">
+            <img class="organization-map-image" src="frontend/organization-map.png" alt="organization-map">
             <figcaption><a>Se på kart</a></figcaption>
           </figure>
         </div>
@@ -129,7 +129,7 @@
     </div>
     <div class="dark-background">
       <div class="contentContainer">
-        <img src="assets/images/demo.gif" class="contentImage"/>
+        <img src="frontend/assets/images/demo.gif" class="contentImage"/>
         <div class="section"></div>
         <div class="section"></div>
       </div>
@@ -137,20 +137,20 @@
 
     <footer>
       <div class="contentContainer flexContainer">
-        <img src="assets/images/arkivverket-logo.png" />
+        <img src="frontend/assets/images/arkivverket-logo.png" />
         <div><a href="mailto:support.arkade@arkivverket.no">support.arkade@arkivverket.no</a></div>
       </div>
     </footer>
   </div>
-  <script src="scripts/download2.js"></script>
-  <script src="scripts/markdown-it.min.js"></script>
-  <script src="scripts/gitHubApiService.js"></script>
-  <script src="scripts/brregApiService.js"></script>
-  <script src="scripts/functions.js"></script>
-  <script src="scripts/init.js"></script>
+  <script src="frontend/scripts/download2.js"></script>
+  <script src="frontend/scripts/markdown-it.min.js"></script>
+  <script src="frontend/scripts/gitHubApiService.js"></script>
+  <script src="frontend/scripts/brregApiService.js"></script>
+  <script src="frontend/scripts/functions.js"></script>
+  <script src="frontend/scripts/init.js"></script>
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
-  <script src="scripts/leaflet.markercluster.js"></script>
-  <script src="scripts/organization-map.js"></script>
+  <script src="frontend/scripts/leaflet.markercluster.js"></script>
+  <script src="frontend/scripts/organization-map.js"></script>
 </body>
 
 </html>
