@@ -5,7 +5,7 @@ L.tileLayer('https://cache.kartverket.no/v1/wmts/1.0.0/topo/default/webmercator/
 }).addTo(organizationMap);
 
 const arkadeIcon = L.icon({
-    iconUrl: 'favicon.ico',
+    iconUrl: 'frontend/favicon.ico',
     //shadowUrl: 'leaf-shadow.png',
     iconSize: [32, 32],
     //shadowSize:   [50, 64],
